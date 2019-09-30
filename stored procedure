@@ -1,0 +1,54 @@
+create table studentTable(
+id varchar(10),
+name varchar(20),
+subject varchar(20),
+marks int,
+primary key (id)
+);
+
+insert into studentTable values('s1','Saurabh ','math     ',98);
+insert into studentTable values('s2','student2','English  ',97);
+insert into studentTable values('s3','student3','Physics  ',99);
+insert into studentTable values('s4','student4','Chemistry',95);
+insert into studentTable values('s5','student5','Comp     ',96);
+
+
+ delimiter //
+ 
+ create procedure nameDisplay() begin select name from studentTable; end// 
+ 
+ delimiter ;
+ 
+ call nameDisplay();
+ 
+ delimiter //
+ 
+ create procedure singleParam(in i varchar(10)) begin select name from studentTable where id=i; end// 
+ 
+ delimiter ;
+ 
+ call singleParam('s2');
+ 
+ delimiter //
+ 
+ create procedure twoParam(in i varchar(10),in n varchar(20)) begin select subject from studentTable where id=i and name = n; end// 
+ 
+ delimiter ;
+ 
+ call twoParam('s1','Saurabh  ');
+ 
+ alter table studentTable add gender varchar(10);
+ 
+ delimiter //
+ 
+ create procedure gc(out countv int) begin select count(gender) into countv from studentTable; end// 
+ 
+ delimiter ;
+ 
+ update studentTable set gender = 'male' where id = 's1';
+ update studentTable set gender = 'female' where id = 's2';
+ 
+ call gc(@countv);
+ select @countv;
+ 
+ 
