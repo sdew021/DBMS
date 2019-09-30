@@ -1,3 +1,2 @@
 # DBMS
-DBMS programs
-codes pertaining to the DBMS lab 
+DBMS programs and codes pertaining to the DBMS lab 
