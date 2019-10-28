@@ -1,0 +1,24 @@
+delimiter //
+
+create procedure sd() 
+begin 
+  declare done boolean default 0; 
+  declare i varchar(5); 
+  declare n varchar(20); 
+  declare sdata cursor for select sname from student;
+  declare sid cursor for select sid from student; 
+  declare continue handler for sqlstate '02000' set done=1; 
+  
+create table if not exists stdata(name varchar(20),id varchar(5)); 
+open sdata;
+open sid; 
+repeat 
+  fetch sdata into n;
+  fetch sid into i; 
+  insert into stdata(name,id) value(n,i); 
+  until done end repeat;
+close sdata;
+close sid; 
+end;
+//
+delimiter ;
